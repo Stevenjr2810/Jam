@@ -26,12 +26,15 @@ public class MazeSpawner : MonoBehaviour {
 	public bool AddGaps = true;
 	public GameObject GoalPrefab = null;
 
+	public GameObject enemyPrefab;
+	public Transform playerTransform;
 
 
     private BasicMazeGenerator mMazeGenerator = null;
 
 	void Start () 
 	{
+
         int totalCoinsGenerated = 0;
 
         if (!FullRandom) {
@@ -83,11 +86,16 @@ public class MazeSpawner : MonoBehaviour {
 					tmp = Instantiate(GoalPrefab,new Vector3(x,0.3f,z), Quaternion.Euler(0,0,0)) as GameObject;
 					tmp.transform.parent = transform;
                     totalCoinsGenerated++;
-                }
-              
+                }//Para que aparezca el enemigo aleatoriamente
+				if (Random.Range(0, 100) < 2) // Que solo tenga 2% de aparición
+				{
+					GameObject enemy = Instantiate(enemyPrefab, new Vector3(x, 0, z), Quaternion.identity) as GameObject;
+					enemy.transform.parent = transform;
+				}
 
             }
 		}
+
 		if(Pillar != null)
 		{
 			for (int row = 0; row < Rows+1; row++) {
@@ -99,9 +107,7 @@ public class MazeSpawner : MonoBehaviour {
 				}
 			}
 		}
-       
-
-
+			
 
         GameController.instance.SetTotalCoins(totalCoinsGenerated);
 

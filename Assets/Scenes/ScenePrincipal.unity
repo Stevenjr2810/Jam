@@ -739,6 +739,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 130820, guid: 6414ea9cfa2ccc24a95c775ffa926968, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 466800, guid: 6414ea9cfa2ccc24a95c775ffa926968, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1147,15 +1151,17 @@ MonoBehaviour:
   Algorithm: 1
   FullRandom: 1
   RandomSeed: 3
-  Floor: {fileID: 2324096868746432865, guid: 323c421d616d51f4fbc3debc7826b5b8, type: 3}
+  Floor: {fileID: 165842, guid: 8d3b36f175a633f429d7bda54c76550d, type: 3}
   Wall: {fileID: 144206, guid: 9de82ec743bb24449a99f5cf1e325d61, type: 3}
-  Pillar: {fileID: 100000, guid: 200c7bff23e82db4c8efd0f74195fcf8, type: 3}
+  Pillar: {fileID: 142476, guid: f3f97a2401feba4479a301d6181e9da6, type: 3}
   Rows: 10
   Columns: 10
   CellWidth: 4
   CellHeight: 4
   AddGaps: 0
   GoalPrefab: {fileID: 8210284496329669852, guid: a459fed9a9e63254dbadc45d3a7eea02, type: 3}
+  enemyPrefab: {fileID: 6862683182052934588, guid: 531e7a2df0ae6c646a61515667d170b7, type: 3}
+  playerTransform: {fileID: 1742521561}
 --- !u!115 &999177115
 MonoScript:
   m_ObjectHideFlags: 0
@@ -1496,7 +1502,7 @@ GameObject:
   - component: {fileID: 1742521560}
   m_Layer: 0
   m_Name: CameraHolder
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
