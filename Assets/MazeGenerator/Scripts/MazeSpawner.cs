@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 //<summary>
 //Game object, that creates maze and instantiates it in scene
@@ -28,6 +29,12 @@ public class MazeSpawner : MonoBehaviour {
 
 	public GameObject enemyPrefab;
 	public Transform playerTransform;
+
+	public GameObject coinPrefab;
+	private int totalCoinsGenerated = 0;
+
+	private int maxEnemies = 5;
+    private List<Vector3> potentialEnemyPositions = new List<Vector3>();
 
 
     private BasicMazeGenerator mMazeGenerator = null;
@@ -87,14 +94,33 @@ public class MazeSpawner : MonoBehaviour {
 					tmp.transform.parent = transform;
                     totalCoinsGenerated++;
                 }//Para que aparezca el enemigo aleatoriamente
-				if (Random.Range(0, 100) < 2) // Que solo tenga 2% de aparición
-				{
-					GameObject enemy = Instantiate(enemyPrefab, new Vector3(x, 0, z), Quaternion.identity) as GameObject;
-					enemy.transform.parent = transform;
+				//if (Random.Range(0, 100) < 2) // Que solo tenga 2% de aparición
+				//{
+				//	GameObject enemy = Instantiate(enemyPrefab, new Vector3(x, 0, z), Quaternion.identity) as GameObject;
+				//	enemy.transform.parent = transform;
+				//}
+				if (IsFarEnoughFromPlayer(x, z)) {
+                    potentialEnemyPositions.Add(new Vector3(x, 0, z));
+                }
+				if (Random.Range(0, 100) < 20) { // 20% de probabilidad de que aparezca una moneda en cada celda
+					GameObject coin = Instantiate(coinPrefab, new Vector3(x, 0, z), Quaternion.identity) as GameObject;
+					coin.transform.parent = transform;
+					totalCoinsGenerated++;
 				}
 
             }
 		}
+
+		// Generate enemies at random positions from the potential positions
+        for (int i = 0; i < maxEnemies && potentialEnemyPositions.Count > 0; i++) {
+            int index = Random.Range(0, potentialEnemyPositions.Count);
+            Vector3 enemyPosition = potentialEnemyPositions[index];
+            GameObject enemy = Instantiate(enemyPrefab, enemyPosition, Quaternion.identity) as GameObject;
+            enemy.transform.parent = transform;
+            potentialEnemyPositions.RemoveAt(index);
+        }
+
+		GameController.instance.SetTotalCoins(totalCoinsGenerated); 
 
 		if(Pillar != null)
 		{
@@ -112,4 +138,11 @@ public class MazeSpawner : MonoBehaviour {
         GameController.instance.SetTotalCoins(totalCoinsGenerated);
 
     }
+
+	bool IsFarEnoughFromPlayer(float x, float z)
+	{
+		Vector3 playerPos = playerTransform.position;
+		float distance = Vector3.Distance(new Vector3(x, 0, z), playerPos);
+		return distance > 10.0f; // Ajusta según la lógica de tu juego
+	}
 }

@@ -1162,6 +1162,7 @@ MonoBehaviour:
   GoalPrefab: {fileID: 8210284496329669852, guid: a459fed9a9e63254dbadc45d3a7eea02, type: 3}
   enemyPrefab: {fileID: 6862683182052934588, guid: 531e7a2df0ae6c646a61515667d170b7, type: 3}
   playerTransform: {fileID: 1742521561}
+  coinPrefab: {fileID: 67777155094515705, guid: 9dd8aa4da4170af4892accf7312e9a89, type: 3}
 --- !u!115 &999177115
 MonoScript:
   m_ObjectHideFlags: 0
@@ -1238,7 +1239,7 @@ GameObject:
   - component: {fileID: 1490591578}
   m_Layer: 0
   m_Name: Camera (1)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

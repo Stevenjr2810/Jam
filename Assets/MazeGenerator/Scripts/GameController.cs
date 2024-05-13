@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour
 
     public Text coinText; // UI Text que muestra el conteo de monedas
     public GameObject winText; // Objeto de texto que dice "Ganaste"
-    private int totalCoins = 0;
+    private int totalCoins = 20;
     private int collectedCoins = 0;
     private bool isGameActive = true;
 
@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        winText.SetActive(false); // Asegura que el texto de "Ganaste" está oculto al inicio
+        winText.SetActive(false); // Asegura que el texto de "Ganaste" estï¿½ oculto al inicio
         UpdateCoinText();
     }
 
@@ -37,7 +37,7 @@ public class GameController : MonoBehaviour
 
     public void CollectCoin()
     {
-        if (!isGameActive) return; // No hace nada si el juego ya no está activo
+        if (!isGameActive) return; // No hace nada si el juego ya no estï¿½ activo
 
         collectedCoins++;
         UpdateCoinText();
@@ -51,14 +51,14 @@ public class GameController : MonoBehaviour
 
     void UpdateCoinText()
     {
-        coinText.text = "Koalas: " + collectedCoins + " / " + totalCoins;
+        coinText.text = "Monedas: " + collectedCoins + " / " + totalCoins;
     }
 
     void WinGame()
     {
         winText.SetActive(true); // Muestra el texto de "Ganaste"
         isGameActive = false; // Marca el juego como no activo
-                              // Aquí puedes añadir más lógica para cuando el jugador gana, como detener el tiempo, etc.
+                              // Aquï¿½ puedes aï¿½adir mï¿½s lï¿½gica para cuando el jugador gana, como detener el tiempo, etc.
 
         Time.timeScale = 0;
 

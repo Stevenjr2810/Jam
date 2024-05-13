@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyChase : MonoBehaviour
 {
@@ -55,4 +56,18 @@ public class EnemyChase : MonoBehaviour
             }
         }
     }
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            RestartGame();
+        }
+    }
+        
+    void RestartGame()
+    {
+        // Usando SceneManager para cargar la escena actualmente activa nuevamente, lo que reinicia el juego
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    
 }
